@@ -1,0 +1,9 @@
+{
+  "name": "host",
+  "version": "1.0.0",
+  "main": "index.ts",
+  "repository": "https://github.com/yogeshdatir/microfrontends-learn",
+  "author": "Yogesh Datir (https://github.com/yogeshdatir)",
+  "license": "GPL-3.0",
+  "private": false
+}
