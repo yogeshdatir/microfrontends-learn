@@ -2,44 +2,47 @@
 
 ## 🚀 Initial Setup Steps
 
-- [ ] Create project directory and initialize yarn
-- [ ] Install React and React DOM dependencies
-- [ ] Install TypeScript and type definitions
-- [ ] Install webpack and webpack-cli
-- [ ] Install webpack-dev-server for development
-- [ ] Install ts-loader for TypeScript compilation
-- [ ] Install html-webpack-plugin for HTML generation
-- [ ] Create basic project structure (src/, public/)
-- [ ] Create webpack.config.js with basic configuration
-- [ ] Create tsconfig.json with TypeScript configuration
-- [ ] Add scripts to package.json (start, build, serve)
-- [ ] Create index.html template
-- [ ] Create basic React components (App.tsx, index.tsx)
-- [ ] Test basic setup with development server
+- [x] Create project directory and initialize yarn
+- [x] Install React and React DOM dependencies
+- [x] Install TypeScript and type definitions
+- [x] Install webpack and webpack-cli
+- [x] Install webpack-dev-server for development
+- [x] Install ts-loader for TypeScript compilation
+- [x] Install html-webpack-plugin for HTML generation
+- [x] Create basic project structure (src/, public/)
+- [x] Create webpack.config.js with basic configuration
+- [x] Create tsconfig.json with TypeScript configuration
+- [x] Add scripts to package.json (start, build, serve)
+- [x] Create index.html template
+- [x] Create basic React components (App.tsx, index.tsx)
+- [x] Test basic setup with development server
 
 ## 🚀 Priority 1: Core Webpack Configuration
 
-- [ ] Add CSS loaders (css-loader, style-loader)
-- [ ] Add image loaders (file-loader or url-loader)
-- [ ] Add SVG loaders (svg-url-loader or @svgr/webpack)
-- [ ] Add font loaders for custom fonts
-- [ ] Configure asset optimization and compression
+- [x] Add CSS loaders (css-loader, style-loader)
+- [ ] Add SASS/SCSS, LESS, postcss loaders ( sass-loader, less-loader, postcss-loader) (optional - if using those extensions)
+- [ ] Add image loaders (file-loader or url-loader) (webpack < 5)
+- [ ] Add SVG loaders (svg-url-loader or @svgr/webpack) (webpack < 5)
+- [ ] Add font loaders for custom fonts (webpack < 5)
+- [x] Add asset handling rules for images, fonts, etc. (webpack 5 asset modules)
+- [ ] Configure asset optimization and compression (optional - for advanced optimization)
 
 ## 🔧 Priority 2: Development Experience
 
-- [ ] Set up Hot Module Replacement (HMR)
-- [ ] Configure source maps for debugging
-- [ ] Add development server configuration
+- [x] Set up Hot Module Replacement (HMR)
+- [ ] Configure source maps for debugging (NEEDS RESEARCH - complex behavior with webpack-dev-server, React, TypeScript)
+- [x] Add development server configuration
 - [ ] Set up environment variables handling (.env files)
-- [ ] Add build progress indicators
+- [x] Add build progress indicators (--progress flag, plugins)
 
 ## ⚡ Priority 3: Production Optimization
 
 - [ ] Configure production mode optimizations
-- [ ] Set up code splitting and lazy loading
+- [ ] Set up code splitting and lazy loading (code-level: React.lazy, dynamic imports)
 - [ ] Add tree shaking configuration
 - [ ] Configure minification (Terser plugin)
 - [ ] Set up bundle analysis tools
+- [ ] Configure splitChunks optimization in webpack.config.js (optional)
 
 ## 🛠️ Priority 4: Build & Deployment
 
