@@ -1,24 +1,24 @@
-import path from 'path';
-import HtmlWebpackPlugin from 'html-webpack-plugin';
-
-const __dirname = path.resolve();
+const HtmlWebpackPlugin = require('html-webpack-plugin');
+const { ModuleFederationPlugin } = require('webpack').container;
+const path = require('path');
 
 // Command flags override config options
-export default {
+module.exports = {
   // mode is set to development by default if not specified
   mode: 'development',
-  entry: path.resolve(__dirname, './src/index.tsx'),
+  entry: path.resolve(__dirname, './src/index'),
   output: {
     // [name] is replaced with the name of the entry point, in this case 'main' which is the default name for the entry point
     filename: '[name].js',
     path: path.resolve(__dirname, 'dist'),
+    publicPath: 'auto', // This allows the app to be served from any path, which is useful for micro-frontends
   },
   resolve: {
     // Resolve TypeScript files
     extensions: ['.ts', '.tsx', '.js'],
   },
   devServer: {
-    port: 3000,
+    port: 3001,
     open: true,
     // hot: true, // hot module replacement, it will update the changes in the browser without reloading the page. Since we are using webpack-dev-server, it is automatically enabled.
   },
@@ -50,6 +50,15 @@ export default {
     ],
   },
   plugins: [
+    // To learn more about the usage of this plugin, please visit https://webpack.js.org/plugins/module-federation-plugin/
+    new ModuleFederationPlugin({
+      name: 'remote',
+      filename: 'remoteEntry.js',
+      exposes: {
+        './App': './src/App',
+      },
+      shared: { react: { singleton: true }, 'react-dom': { singleton: true } },
+    }),
     // HTML Webpack Plugin to generate HTML file, it will automatically inject the script tag for the generated bundle
     new HtmlWebpackPlugin({
       template: 'index.html',

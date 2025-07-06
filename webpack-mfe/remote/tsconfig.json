@@ -2,7 +2,9 @@
   "compilerOptions": {
     "target": "es2016",
     "jsx": "react-jsx",
-    "module": "commonjs",
+    // module: "ESNext" from "commonjs" and moduleResolution: "node" are needed to support require in webpack config
+    "module": "ESNext",
+    "moduleResolution": "node",
     "esModuleInterop": true,
     "forceConsistentCasingInFileNames": true,
     "strict": true,
