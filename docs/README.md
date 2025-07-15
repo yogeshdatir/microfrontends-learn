@@ -9,7 +9,7 @@ This folder contains comprehensive documentation for learning Micro-Frontend (MF
 | Topic                                                                                     | Status           | Description                              |
 | ----------------------------------------------------------------------------------------- | ---------------- | ---------------------------------------- |
 | [1.1 What is Micro-Frontend Architecture?](./phase-1/1.1-what-is-mfe-architecture.md)     | ✅ **Completed** | Core concepts and architectural patterns |
-| [1.2 Why MFE over monolith?](./phase-1/1.2-why-mfe-over-monolith.md)                      | 📝 Pending       | Pros, cons, and use cases                |
+| [1.2 Why MFE over monolith?](./phase-1/1.2-why-mfe-over-monolith.md)                      | ✅ **Completed** | Pros, cons, and use cases                |
 | [1.3 Module Federation: Core Concepts](./phase-1/1.3-module-federation-core-concepts.md)  | 📝 Pending       | Webpack Module Federation fundamentals   |
 | [1.4 Host vs Remote: How They Communicate](./phase-1/1.4-host-vs-remote-communication.md) | 📝 Pending       | Communication patterns and setup         |
 | [1.5 Basic Host and Remote Setup](./phase-1/1.5-basic-host-remote-setup.md)               | ✅ **Completed** | Common MFE concepts and patterns         |
