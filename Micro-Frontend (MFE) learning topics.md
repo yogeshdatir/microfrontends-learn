@@ -83,19 +83,31 @@ Here’s a clear, hands-on **Micro-Frontend (MFE) learning topic list in order**
 
 ```
 microfrontends-learn/
+├── docs/                              # General MFE concepts & learning
+│   ├── phase-1/
+│   │   ├── 1.1-what-is-mfe-architecture.md
+│   │   ├── 1.2-why-mfe-over-monolith.md
+│   │   └── ...
+│   └── README.md
 ├── webpack-mfe/
+│   ├── docs/
+│   │   ├── webpack-config/            # General webpack configuration
+│   │   ├── mfe/                       # MFE-specific implementation
+│   │   └── README.md
 │   ├── host/
 │   ├── mfe-users/
 │   ├── mfe-reports/
 │   └── shared-ui/
-│
 ├── vite-mfe/
+│   ├── docs/
+│   │   ├── vite-config/               # General vite configuration
+│   │   ├── mfe/                       # MFE-specific implementation
+│   │   └── README.md
 │   ├── host/
 │   ├── mfe-settings/
 │   ├── mfe-dashboard/
 │   └── shared-ui/
-│
-└── NOTES.md
+└── README.md
 ```
 
 ---
@@ -105,10 +117,8 @@ microfrontends-learn/
 | Reason                   | Why it works                                    |
 | ------------------------ | ----------------------------------------------- |
 | 🔁 Side-by-side learning | You can compare Vite vs Webpack in real time    |
-| ✅ Clear separation       | No confusion about tooling or config            |
+| ✅ Clear separation      | No confusion about tooling or config            |
 | 📦 Reusable structure    | Each dir can have its own package.json, scripts |
 | 🚀 Easy to extract later | Turn one or both into real apps if needed       |
 
 ---
-
-
