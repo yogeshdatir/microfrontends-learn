@@ -61,7 +61,7 @@ module.exports = {
     }),
     // HTML Webpack Plugin to generate HTML file, it will automatically inject the script tag for the generated bundle
     new HtmlWebpackPlugin({
-      template: 'index.html',
+      template: './public/index.html',
     }),
   ],
 };

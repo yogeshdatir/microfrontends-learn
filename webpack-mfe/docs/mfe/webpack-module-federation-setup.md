@@ -1,14 +1,20 @@
 # Webpack Module Federation Setup Guide
 
+---
+
 ## 📺 Video Tutorials
 
 - [Module Federation Tutorial](https://youtu.be/lKKsjpH09dU?si=GvIf8SVDOKLOmezZ)
 - [Micro Frontends with Module Federation](https://youtu.be/s_Fs4AXsTnA?si=qVY16xwoEvjWvdEs)
 - [Module Federation in React](https://youtu.be/qkaTFb7mOb4?si=3DTSErJS7SIO3fbp)
 
+---
+
 ## ✅ What's Been Completed
 
 This document covers the Webpack 5 Module Federation implementation for host and remote applications.
+
+---
 
 ## 🏗️ Project Structure
 
@@ -32,7 +38,9 @@ webpack-mfe/
     └── index.html
 ```
 
-## 🔧 Host Configuration
+---
+
+## 1️⃣ Host Configuration
 
 ### Webpack Config (`host/webpack.config.js`)
 
@@ -67,7 +75,7 @@ module.exports = {
 };
 ```
 
-### Key Host Features:
+#### Key Host Features
 
 | Feature                 | Purpose                            | Configuration                                                        |
 | ----------------------- | ---------------------------------- | -------------------------------------------------------------------- |
@@ -76,7 +84,9 @@ module.exports = {
 | **Auto Public Path**    | Flexible deployment                | `publicPath: 'auto'`                                                 |
 | **Development Server**  | Local development                  | `port: 3000`                                                         |
 
-## 🔧 Remote Configuration
+---
+
+## 2️⃣ Remote Configuration
 
 ### Webpack Config (`remote/webpack.config.js`)
 
@@ -112,7 +122,7 @@ module.exports = {
 };
 ```
 
-### Key Remote Features:
+#### Key Remote Features
 
 | Feature                 | Purpose                            | Configuration                            |
 | ----------------------- | ---------------------------------- | ---------------------------------------- |
@@ -121,7 +131,9 @@ module.exports = {
 | **Shared Dependencies** | Prevents duplicate React instances | `shared: { react: { singleton: true } }` |
 | **Development Server**  | Local development                  | `port: 3001`                             |
 
-## 🚀 Application Code
+---
+
+## 3️⃣ Application Code
 
 ### Host App (`host/src/App.tsx`)
 
@@ -162,7 +174,9 @@ const App = () => {
 export default App;
 ```
 
-## 🔑 Key Concepts Implemented
+---
+
+## 4️⃣ Key Concepts Implemented
 
 ### 1. **Module Federation Plugin**
 
@@ -185,14 +199,18 @@ export default App;
 - Remote runs on port 3001
 - Both can run independently
 
-## 🎯 How It Works
+---
+
+## 5️⃣ How It Works
 
 1. **Remote** exposes its `App` component via Module Federation
 2. **Host** declares the remote in its webpack config
 3. **Host** uses `React.lazy()` to import the remote component
 4. **Webpack** handles the dynamic loading and dependency sharing
 
-## 🚀 Running the Setup
+---
+
+## 6️⃣ Running the Setup
 
 ```bash
 # Terminal 1 - Start Remote
@@ -203,3 +221,5 @@ yarn start
 cd webpack-mfe/host
 yarn start
 ```
+
+---
