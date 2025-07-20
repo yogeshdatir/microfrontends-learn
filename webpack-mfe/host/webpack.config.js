@@ -55,6 +55,8 @@ module.exports = {
       name: 'host',
       remotes: {
         remote: 'remote@http://localhost:3001/remoteEntry.js',
+        stylingIsolation:
+          'stylingIsolation@http://localhost:3002/remoteEntry.js',
       },
       shared: { react: { singleton: true }, 'react-dom': { singleton: true } },
     }),

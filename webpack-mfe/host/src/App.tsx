@@ -2,6 +2,8 @@ import { Suspense, lazy } from 'react';
 
 const RemoteApp = lazy(() => import('remote/App'));
 
+const StylingIsolationRemoteApp = lazy(() => import('stylingIsolation/App'));
+
 const App = () => {
   return (
     <div>
@@ -10,6 +12,9 @@ const App = () => {
       <p>Later, this will consume the remote app.</p>
       <Suspense fallback={<div>Loading remote app...</div>}>
         <RemoteApp />
+      </Suspense>
+      <Suspense fallback={<div>Loading remote app...</div>}>
+        <StylingIsolationRemoteApp />
       </Suspense>
     </div>
   );

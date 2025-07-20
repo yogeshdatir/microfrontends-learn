@@ -27,7 +27,8 @@ webpack-mfe/
 │   │   └── bootstrap.tsx    # Bootstrap file
 │   ├── webpack.config.js    # Host webpack config
 │   ├── package.json
-│   └── index.html
+│   └── public/
+│       └── index.html
 └── remote/
     ├── src/
     │   ├── App.tsx          # Remote app component
@@ -35,12 +36,38 @@ webpack-mfe/
     │   └── bootstrap.tsx    # Bootstrap file
     ├── webpack.config.js    # Remote webpack config
     ├── package.json
-    └── index.html
+    └── public/
+        └── index.html
 ```
 
 ---
 
-## 1️⃣ Host Configuration
+## 1️⃣ Add a Bootstrap File for Safe App Startup
+
+In Module Federation setups, especially with React, use a separate `bootstrap.tsx` file as the true app entry point. This ensures shared dependencies (like React) are loaded correctly and avoids issues with module federation timing.
+
+**How to set it up:**
+
+`src/index.ts`:
+
+```ts
+import('./bootstrap');
+```
+
+`src/bootstrap.tsx`:
+
+```tsx
+import React from 'react';
+import { createRoot } from 'react-dom/client';
+import App from './App';
+
+const root = createRoot(document.getElementById('root')!);
+root.render(<App />);
+```
+
+---
+
+## 2️⃣ Host Configuration
 
 ### Webpack Config (`host/webpack.config.js`)
 
@@ -64,6 +91,8 @@ module.exports = {
       name: 'host',
       remotes: {
         remote: 'remote@http://localhost:3001/remoteEntry.js',
+        stylingIsolation:
+          'stylingIsolation@http://localhost:3002/remoteEntry.js',
       },
       shared: {
         react: { singleton: true },
@@ -77,18 +106,31 @@ module.exports = {
 
 #### Key Host Features
 
-| Feature                 | Purpose                            | Configuration                                                        |
-| ----------------------- | ---------------------------------- | -------------------------------------------------------------------- |
-| **Module Federation**   | Consumes remote modules            | `remotes: { remote: 'remote@http://localhost:3001/remoteEntry.js' }` |
-| **Shared Dependencies** | Prevents duplicate React instances | `shared: { react: { singleton: true } }`                             |
-| **Auto Public Path**    | Flexible deployment                | `publicPath: 'auto'`                                                 |
-| **Development Server**  | Local development                  | `port: 3000`                                                         |
+| Feature                 | Purpose                            | Configuration                                     |
+| ----------------------- | ---------------------------------- | ------------------------------------------------- |
+| **Module Federation**   | Consumes remote modules            | `remotes: { remote: ..., stylingIsolation: ... }` |
+| **Shared Dependencies** | Prevents duplicate React instances | `shared: { react: { singleton: true } }`          |
+| **Auto Public Path**    | Flexible deployment                | `publicPath: 'auto'`                              |
+| **Development Server**  | Local development                  | `port: 3000`                                      |
 
 ---
 
-## 2️⃣ Remote Configuration
+## 🆕 Multiple Remotes Example
 
-### Webpack Config (`remote/webpack.config.js`)
+To consume multiple remotes, add more entries to the `remotes` object in the ModuleFederationPlugin config (as above). You can then import modules from each remote using their configured names:
+
+```tsx
+const RemoteApp = React.lazy(() => import('remote/App'));
+const StylingIsolationRemoteApp = React.lazy(
+  () => import('stylingIsolation/App')
+);
+```
+
+---
+
+## 3️⃣ Remote Configuration
+
+### Webpack Config (`remote/webpack.config.js` or `styling-isolation-demo/webpack.config.js`)
 
 ```javascript
 const HtmlWebpackPlugin = require('html-webpack-plugin');
@@ -107,7 +149,7 @@ module.exports = {
   },
   plugins: [
     new ModuleFederationPlugin({
-      name: 'remote',
+      name: 'remote', // or 'stylingIsolation' for the styling demo
       filename: 'remoteEntry.js',
       exposes: {
         './App': './src/App',
@@ -124,25 +166,26 @@ module.exports = {
 
 #### Key Remote Features
 
-| Feature                 | Purpose                            | Configuration                            |
-| ----------------------- | ---------------------------------- | ---------------------------------------- |
-| **Module Federation**   | Exposes modules to host            | `exposes: { './App': './src/App' }`      |
-| **Remote Entry**        | Entry point for federation         | `filename: 'remoteEntry.js'`             |
-| **Shared Dependencies** | Prevents duplicate React instances | `shared: { react: { singleton: true } }` |
-| **Development Server**  | Local development                  | `port: 3001`                             |
+| Feature                 | Purpose                            | Configuration                                                    |
+| ----------------------- | ---------------------------------- | ---------------------------------------------------------------- |
+| **Module Federation**   | Exposes modules to host            | `exposes: { './App': './src/App' }`                              |
+| **Remote Entry**        | Entry point for federation         | `filename: 'remoteEntry.js'`                                     |
+| **Shared Dependencies** | Prevents duplicate React instances | `shared: { react: { singleton: true, requiredVersion: false } }` |
+| **Development Server**  | Local development                  | `port: 3001` or `3002`                                           |
 
 ---
 
-## 3️⃣ Application Code
+## 4️⃣ Application Code
 
 ### Host App (`host/src/App.tsx`)
 
-```typescript
+```tsx
 import { Suspense, lazy } from 'react';
 
 const RemoteApp = lazy(() => import('remote/App'));
+const StylingIsolationRemoteApp = lazy(() => import('stylingIsolation/App'));
 
-const App = () => {
+function App() {
   return (
     <div>
       <h1>🚀 Host App</h1>
@@ -151,9 +194,12 @@ const App = () => {
       <Suspense fallback={<div>Loading remote app...</div>}>
         <RemoteApp />
       </Suspense>
+      <Suspense fallback={<div>Loading styling isolation app...</div>}>
+        <StylingIsolationRemoteApp />
+      </Suspense>
     </div>
   );
-};
+}
 
 export default App;
 ```
@@ -174,9 +220,13 @@ const App = () => {
 export default App;
 ```
 
+## 🆕 TypeScript: Module Declarations for Remotes
+
+If you import a federated module (like 'stylingIsolation/App') in your host, add a module declaration in `src/remote.d.ts`:
+
 ---
 
-## 4️⃣ Key Concepts Implemented
+## 5️⃣ Key Concepts Implemented
 
 ### 1. **Module Federation Plugin**
 
@@ -197,11 +247,12 @@ export default App;
 
 - Host runs on port 3000
 - Remote runs on port 3001
-- Both can run independently
+- Styling isolation demo runs on port 3002
+- All can run independently
 
 ---
 
-## 5️⃣ How It Works
+## 6️⃣ How It Works
 
 1. **Remote** exposes its `App` component via Module Federation
 2. **Host** declares the remote in its webpack config
@@ -210,14 +261,18 @@ export default App;
 
 ---
 
-## 6️⃣ Running the Setup
+## 7️⃣ Running the Setup
 
 ```bash
-# Terminal 1 - Start Remote
+# Terminal 1 - Start Styling Isolation Remote
+cd webpack-mfe/styling-isolation-demo
+yarn start
+
+# Terminal 2 - Start Remote
 cd webpack-mfe/remote
 yarn start
 
-# Terminal 2 - Start Host
+# Terminal 3 - Start Host
 cd webpack-mfe/host
 yarn start
 ```
