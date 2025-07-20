@@ -91,18 +91,24 @@ microfrontends-learn/
 │   │   ├── mfe/                       # MFE-specific implementation
 │   │   └── README.md
 │   ├── host/
-│   ├── mfe-users/
-│   ├── mfe-reports/
-│   └── shared-ui/
-├── vite-mfe/
+│   ├── remote/
+│   ├── shared-ui/
+│   ├── styling-demo/                  # Phase 3: Styling and Isolation
+│   ├── logic-demo/                    # Phase 4: Shared Logic and Utilities
+│   ├── integration-demo/              # Phase 6: Advanced Integration
+│   ├── scaling-demo/                  # Phase 7: Scaling Up
+└── vite-mfe/
 │   ├── docs/
 │   │   ├── vite-config/               # General vite configuration
 │   │   ├── mfe/                       # MFE-specific implementation
 │   │   └── README.md
 │   ├── host/
-│   ├── mfe-settings/
-│   ├── mfe-dashboard/
-│   └── shared-ui/
+│   ├── remote/
+│   ├── shared-ui/
+│   ├── styling-demo/                  # Phase 3: Styling and Isolation
+│   ├── logic-demo/                    # Phase 4: Shared Logic and Utilities
+│   ├── integration-demo/              # Phase 6: Advanced Integration
+│   ├── scaling-demo/                  # Phase 7: Scaling Up
 └── README.md
 ```
 
