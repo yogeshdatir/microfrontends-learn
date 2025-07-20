@@ -1,5 +1,11 @@
 # Webpack Module Federation Setup Guide
 
+## 📺 Video Tutorials
+
+- [Module Federation Tutorial](https://youtu.be/lKKsjpH09dU?si=GvIf8SVDOKLOmezZ)
+- [Micro Frontends with Module Federation](https://youtu.be/s_Fs4AXsTnA?si=qVY16xwoEvjWvdEs)
+- [Module Federation in React](https://youtu.be/qkaTFb7mOb4?si=3DTSErJS7SIO3fbp)
+
 ## ✅ What's Been Completed
 
 This document covers the Webpack 5 Module Federation implementation for host and remote applications.
