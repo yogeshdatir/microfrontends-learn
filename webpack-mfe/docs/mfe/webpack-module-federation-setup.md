@@ -2,6 +2,23 @@
 
 ---
 
+## 📦 Setting Up Your Webpack + React + TypeScript Project
+
+Before you begin with Module Federation, first set up a standard React app using Webpack and TypeScript. Follow the step-by-step instructions in [webpack-react-step-by-step.md](../webpack-config/webpack-react-step-by-step.md) to:
+
+- Create your project directory and initialize it
+- Install React, TypeScript, Webpack, and related dependencies
+- Set up your `tsconfig.json` (with `include: ["src"]`)
+- Create your project structure (`src/`, `public/`, etc.)
+- Add your basic React code and CSS
+- Configure your `webpack.config.js` (entry, output, loaders, plugins, devServer)
+- Add scripts to `package.json` for `start` and `build`
+- Test your app to ensure it runs with `yarn start`
+
+Once your basic React + Webpack app is working, return to this guide to add Module Federation and micro-frontend features.
+
+---
+
 ## 📺 Video Tutorials
 
 - [Module Federation Tutorial](https://youtu.be/lKKsjpH09dU?si=GvIf8SVDOKLOmezZ)
@@ -10,9 +27,17 @@
 
 ---
 
-## ✅ What's Been Completed
+## 🗺️ What You'll Build in This Guide
 
-This document covers the Webpack 5 Module Federation implementation for host and remote applications.
+This guide will walk you through:
+
+- Setting up a host and one or more remote micro-frontends using Webpack 5 Module Federation
+- Using a bootstrap file for safe app startup
+- Configuring multiple remotes
+- Implementing key concepts like shared dependencies, lazy loading, and CSS isolation
+- Running and testing your micro-frontend architecture
+
+Use this section as a roadmap and progress tracker as you follow the guide.
 
 ---
 
