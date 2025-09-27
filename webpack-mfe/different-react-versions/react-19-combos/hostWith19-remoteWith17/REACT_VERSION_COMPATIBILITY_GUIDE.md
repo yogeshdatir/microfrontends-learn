@@ -140,27 +140,33 @@ function RemoteComponent() {
 
 ## Testing Considerations
 
-### Unit Testing
-- Each application tests with its own React version
-- No cross-version testing complexity
-- Standard testing patterns apply
+### Unit Testing Steps:
+1. **Test Each App Separately**: Each application tests with its own React version
+2. **Use Standard Patterns**: No cross-version testing complexity
+3. **Verify Component Logic**: Standard testing patterns apply to individual components
 
-### Integration Testing
-- Test mount/unmount lifecycle
-- Verify DOM container management
-- Ensure no React context bleeding
+### Integration Testing Steps:
+1. **Test Mount Lifecycle**: Verify remote mounts correctly in host container
+2. **Test Unmount Lifecycle**: Ensure proper cleanup when remote unmounts
+3. **Test DOM Management**: Verify DOM container management works correctly
+4. **Test Error Scenarios**: Ensure graceful handling when remote fails to load
+5. **Test Context Isolation**: Ensure no React context bleeding between versions
 
 ## Deployment Strategy
 
-### Independent Deployment
-- Host and remote can be deployed separately
-- No shared dependency coordination required
-- Version upgrades can be rolled out independently
+### Independent Deployment Steps:
+1. **Build Applications Separately**: Each application builds independently
+2. **Deploy Host Application**: Deploy host to your hosting environment
+3. **Deploy Remote Application**: Deploy remote to separate hosting environment
+4. **Update Remote URLs**: Ensure host points to correct remote URL
+5. **Test Integration**: Verify cross-deployment communication works
 
-### Runtime Loading
-- Remote loads dynamically at runtime
-- No build-time coupling between applications
-- Graceful fallback if remote fails to load
+### Runtime Loading Steps:
+1. **Host Loads First**: Host application starts and renders initial UI
+2. **Dynamic Remote Import**: Host dynamically imports remote module at runtime
+3. **Mount Remote**: Remote mounts into host-provided DOM container
+4. **Handle Failures**: Graceful fallback if remote fails to load
+5. **Cleanup**: Proper unmounting when host component unmounts
 
 ## Troubleshooting
 

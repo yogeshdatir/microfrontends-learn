@@ -133,10 +133,22 @@ if (remoteRoot) {
 
 ### Development Workflow
 
-1. Start remote application: `npm start` (port 3001)
-2. Start host application: `npm start` (port 3000)
-3. Host automatically loads remote at runtime
-4. Both applications can be developed independently
+#### Setup Steps:
+1. **Configure Webpack**: Set up Module Federation in both applications with `shared: {}`
+2. **Install Dependencies**: Ensure both apps have their respective React versions
+3. **Create Remote Wrapper**: Implement mount/unmount functions in remote app
+4. **Implement Host Integration**: Add DOM-based loading logic in host app
+
+#### Running Steps:
+5. **Start Remote First**: `cd remote && npm start` (port 3001)
+6. **Start Host Second**: `cd host && npm start` (port 3000)
+7. **Verify Integration**: Host should automatically load remote at runtime
+8. **Development**: Both applications can be developed independently
+
+#### Testing Steps:
+9. **Test Loading**: Verify remote loads correctly in host
+10. **Test Error Handling**: Ensure graceful failure if remote is unavailable
+11. **Test Cleanup**: Verify proper unmounting when host component unmounts
 
 ### Error Prevention
 
