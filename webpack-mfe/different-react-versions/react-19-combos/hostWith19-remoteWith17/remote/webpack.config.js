@@ -41,19 +41,9 @@ module.exports = {
       name: 'remote', // or 'stylingIsolation' for the styling demo
       filename: 'remoteEntry.js',
       exposes: {
-        './App': './src/App',
+        './App': './src/RemoteWrapper',
       },
-      shared: [
-        'react-dom',
-        {
-          react: {
-            import: 'react', // the "react" package will be used a provided and fallback module
-            shareKey: 'newReact', // under this name the shared module will be placed in the share scope
-            shareScope: 'default', // share scope with this name will be used
-            singleton: true, // only a single version of the shared module is allowed
-          },
-        },
-      ],
+      shared: {},
     }),
     new HtmlWebpackPlugin({
       template: './public/index.html',
