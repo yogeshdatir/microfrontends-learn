@@ -1,8 +1,8 @@
-# Micro-Frontend Generic Learnings - React 17 Host + React 19 Remote
+# Micro-Frontend Generic Learnings - React 19 Host + React 18 Remote
 
 ## Complete React Isolation Pattern
 
-This setup demonstrates running **React 17 host** with **React 19 remote** using complete React isolation through Module Federation.
+This setup demonstrates running **React 19 host** with **React 18 remote** using complete React isolation through Module Federation.
 
 ### Key Architecture Decisions
 
@@ -12,7 +12,7 @@ This setup demonstrates running **React 17 host** with **React 19 remote** using
 
 ### Webpack Configuration Pattern
 
-**Host (React 17)**:
+**Host (React 19)**:
 ```javascript
 new ModuleFederationPlugin({
   name: 'host',
@@ -23,7 +23,7 @@ new ModuleFederationPlugin({
 })
 ```
 
-**Remote (React 19)**:
+**Remote (React 18)**:
 ```javascript
 new ModuleFederationPlugin({
   name: 'remote',
@@ -70,7 +70,7 @@ useEffect(() => {
 
 **Remote Wrapper**:
 ```typescript
-// Remote exposes mount/unmount functions using React 19 APIs
+// Remote exposes mount/unmount functions using React 18 APIs
 import { createRoot, Root } from 'react-dom/client';
 import App from './App';
 
@@ -95,18 +95,19 @@ export default {
 
 ### Bootstrap Configuration
 
-**Host Bootstrap** (React 17):
+**Host Bootstrap** (React 19):
 ```typescript
-import ReactDOM from 'react-dom';
+import { createRoot } from 'react-dom/client';
 import App from './App';
 
 const container = document.getElementById('root');
 if (container) {
-  ReactDOM.render(<App />, container);
+  const root = createRoot(container);
+  root.render(<App />);
 }
 ```
 
-**Remote Bootstrap** (React 19):
+**Remote Bootstrap** (React 18):
 ```typescript
 import { createRoot } from 'react-dom/client';
 import App from './App';

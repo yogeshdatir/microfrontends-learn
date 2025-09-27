@@ -1,8 +1,8 @@
-# React Version Compatibility Guide - React 19 Host + React 17 Remote
+# React Version Compatibility Guide - React 19 Host + React 18 Remote
 
 ## Setup Overview
 
-This configuration demonstrates a **React 19 host application** consuming a **React 17 remote application** using Webpack Module Federation with complete React isolation.
+This configuration demonstrates a **React 19 host application** consuming a **React 18 remote application** using Webpack Module Federation with complete React isolation.
 
 ## React Version Compatibility
 
@@ -12,11 +12,11 @@ This configuration demonstrates a **React 19 host application** consuming a **Re
 - **JSX Transform**: Automatic with React 19 optimizations
 - **New Features**: Uses React 19 concurrent features and optimizations
 
-### Remote Application (React 17)
-- **React Version**: 17.0.2
-- **Rendering API**: `ReactDOM.render()` legacy API
-- **JSX Transform**: Classic transform
-- **Features**: Standard React 17 features and patterns
+### Remote Application (React 18)
+- **React Version**: 18.3.1
+- **Rendering API**: `createRoot()` from `react-dom/client`
+- **JSX Transform**: Automatic
+- **Features**: React 18 concurrent rendering and Suspense
 
 ## Version Isolation Strategy
 
@@ -33,7 +33,7 @@ new ModuleFederationPlugin({
 
 ### Why Complete Isolation?
 
-1. **API Differences**: React 19 and 17 have significantly different internal APIs
+1. **API Differences**: React 19 and 18 have different internal APIs
 2. **Runtime Safety**: Prevents version conflicts and unexpected behavior
 3. **Independent Development**: Teams can upgrade React versions independently
 4. **Predictable Behavior**: Each app operates with its expected React version
@@ -75,28 +75,30 @@ useEffect(() => {
 **Package Dependencies**:
 ```json
 {
-  "react": "^17.0.2",
-  "react-dom": "^17.0.2"
+  "react": "^18.3.1",
+  "react-dom": "^18.3.1"
 }
 ```
 
 **Remote Wrapper**:
 ```typescript
-import ReactDOM from 'react-dom';
+import { createRoot, Root } from 'react-dom/client';
 import App from './App';
 
-let mountNode: HTMLElement | null = null;
+let root: Root | null = null;
 
 export default {
   mount: (element: HTMLElement) => {
-    mountNode = element;
-    ReactDOM.render(<App />, element);
+    if (!root) {
+      root = createRoot(element);
+    }
+    root.render(<App />);
   },
 
   unmount: (element: HTMLElement) => {
-    if (mountNode) {
-      ReactDOM.unmountComponentAtNode(mountNode);
-      mountNode = null;
+    if (root) {
+      root.unmount();
+      root = null;
     }
   }
 };
@@ -105,13 +107,13 @@ export default {
 ## React API Compatibility
 
 ### Rendering APIs
-- **React 19**: Uses modern `createRoot()` with enhanced concurrent features
-- **React 17**: Uses legacy `ReactDOM.render()` API
-- **Compatibility**: Both versions use different mounting API patterns but work together through DOM isolation
+- **React 19**: Uses `createRoot()` with enhanced concurrent features
+- **React 18**: Uses `createRoot()` with standard concurrent rendering
+- **Compatibility**: Both versions use the same mounting API pattern
 
 ### Lifecycle Management
-- **Mount**: React 19 uses `createRoot()` and `render()`, React 17 uses `ReactDOM.render()`
-- **Unmount**: React 19 uses `root.unmount()`, React 17 uses `ReactDOM.unmountComponentAtNode()`
+- **Mount**: Both use `createRoot()` and `render()`
+- **Unmount**: Both use `root.unmount()`
 - **Cleanup**: Proper root disposal prevents memory leaks
 
 ## Development Guidelines
@@ -127,14 +129,14 @@ function HostComponent() {
 }
 ```
 
-### Remote Development (React 17)
+### Remote Development (React 18)
 ```typescript
-// Use React 17 patterns
-import ReactDOM from 'react-dom';
+// Use React 18 features
+import { useDeferredValue } from 'react'; // Available in React 18
 
 function RemoteComponent() {
-  // React 17 specific patterns available
-  return <div>Remote with React 17 features</div>;
+  // React 18 concurrent features available
+  return <div>Remote with React 18 features</div>;
 }
 ```
 
@@ -168,7 +170,6 @@ function RemoteComponent() {
 1. **Script Errors**: Eliminated by using complete isolation instead of shared dependencies
 2. **Version Conflicts**: Prevented by bundling separate React versions
 3. **Context Issues**: Avoided by using DOM-based integration pattern
-4. **API Mismatches**: Resolved by using appropriate React APIs for each version
 
 ### Performance Monitoring
 - Monitor bundle sizes for both applications
