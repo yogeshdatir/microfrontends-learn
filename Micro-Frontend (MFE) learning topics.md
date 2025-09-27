@@ -1,7 +1,3 @@
-Here’s a clear, hands-on **Micro-Frontend (MFE) learning topic list in order**, structured for gradual progression with PR-based work:
-
----
-
 ## 🧱 Phase 1: Fundamentals
 
 1. **What is Micro-Frontend Architecture?**
@@ -95,18 +91,24 @@ microfrontends-learn/
 │   │   ├── mfe/                       # MFE-specific implementation
 │   │   └── README.md
 │   ├── host/
-│   ├── mfe-users/
-│   ├── mfe-reports/
-│   └── shared-ui/
-├── vite-mfe/
+│   ├── remote/
+│   ├── shared-ui/
+│   ├── styling-demo/                  # Phase 3: Styling and Isolation
+│   ├── logic-demo/                    # Phase 4: Shared Logic and Utilities
+│   ├── integration-demo/              # Phase 6: Advanced Integration
+│   ├── scaling-demo/                  # Phase 7: Scaling Up
+└── vite-mfe/
 │   ├── docs/
 │   │   ├── vite-config/               # General vite configuration
 │   │   ├── mfe/                       # MFE-specific implementation
 │   │   └── README.md
 │   ├── host/
-│   ├── mfe-settings/
-│   ├── mfe-dashboard/
-│   └── shared-ui/
+│   ├── remote/
+│   ├── shared-ui/
+│   ├── styling-demo/                  # Phase 3: Styling and Isolation
+│   ├── logic-demo/                    # Phase 4: Shared Logic and Utilities
+│   ├── integration-demo/              # Phase 6: Advanced Integration
+│   ├── scaling-demo/                  # Phase 7: Scaling Up
 └── README.md
 ```
 
@@ -122,3 +124,10 @@ microfrontends-learn/
 | 🚀 Easy to extract later | Turn one or both into real apps if needed       |
 
 ---
+
+## 📚 Handy References
+
+- [Module Federation Official Website](https://module-federation.io/) – Essentials, docs, and guides
+- [module-federation/module-federation-examples](https://github.com/module-federation/module-federation-examples) – Real-world examples repo  
+  SSH: `git@github.com:module-federation/module-federation-examples.git`
+- [module-federation GitHub organization](https://github.com/module-federation) – Main repo and related projects (the README is also a good overview)
