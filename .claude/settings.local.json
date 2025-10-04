@@ -1,0 +1,10 @@
+{
+  "permissions": {
+    "allow": [
+      "Read(//d/Workspaces/Micro-frontend/microfrontends-learn/**)",
+      "Read(//d/Workspaces/Micro-frontend/microfrontends-learn/docs/**)"
+    ],
+    "deny": [],
+    "ask": []
+  }
+}
